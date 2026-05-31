@@ -1,7 +1,7 @@
 export const CAKTO = {
-  mensal: '#',
-  trimestral: '#',
-  anual: '#',
+  mensal: 'https://pay.cakto.com.br/3d7n3nz_908123',
+  trimestral: 'https://pay.cakto.com.br/ovcjjpu',
+  anual: 'https://pay.cakto.com.br/3eqbz29',
 }
 
 export const TRIAL = {
