@@ -1,0 +1,95 @@
+---
+import WhatsappMock from '../WhatsappMock.astro'
+import { CAKTO, TRIAL } from '../../config'
+---
+
+<!-- NAV -->
+<nav class="sticky top-0 z-50 border-b border-white/5 backdrop-blur-md bg-bg/85">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-2.5">
+      <img src="/icone-app.png" alt="Logo AssisTech BOT" width="32" height="32" class="w-8 h-8" />
+      <span class="font-black text-lg tracking-tight leading-none">
+        <span class="text-ice">Assis</span><span class="text-neon">Tech</span>
+      </span>
+    </div>
+    <a href={CAKTO.mensal}
+       class="hidden sm:inline-flex items-center justify-center bg-neon text-bg font-black text-sm px-5 py-2.5 rounded-xl hover:bg-neon-dark focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none transition-colors">
+      {TRIAL.cta}
+    </a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="relative overflow-hidden" style="min-height: 88vh; display: flex; align-items: center;">
+  <!-- Radial glow -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 rounded-full pointer-events-none"
+       style="background: radial-gradient(circle, rgba(124,255,0,0.07) 0%, transparent 70%); filter: blur(80px);">
+  </div>
+
+  <div class="relative w-full max-w-6xl mx-auto px-6 py-20 lg:py-32">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+      <!-- Texto -->
+      <div>
+        <p class="text-neon text-xs font-bold uppercase tracking-widest mb-6">
+          Atendimento no WhatsApp
+        </p>
+        <h1 class="font-black tracking-tight leading-tight text-ice mb-6"
+            style="font-size: clamp(2rem, 5vw, 3.75rem); text-wrap: balance;">
+          Seu assistente técnico de bancada, dentro do WhatsApp.
+        </h1>
+        <p class="text-lg leading-relaxed text-muted mb-8">
+          Consulta de película na hora, ordem de serviço com a sua marca e garantia rastreável.
+          Sem app, sem painel — no WhatsApp que você já usa o dia todo.
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href={TRIAL.link}
+             class="inline-flex items-center justify-center bg-neon text-bg font-black text-base px-8 py-4 rounded-xl hover:bg-neon-dark focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-bg outline-none transition-colors">
+            {TRIAL.cta}
+          </a>
+          <a href="#como-funciona"
+             class="inline-flex items-center justify-center border border-white/15 text-ice font-semibold text-base px-8 py-4 rounded-xl hover:border-neon/40 focus-visible:ring-2 focus-visible:ring-white/30 outline-none transition-colors">
+            Ver como funciona
+          </a>
+        </div>
+        <p class="mt-4 text-xs text-muted">{TRIAL.descricao} — sem cartão.</p>
+      </div>
+
+      <!-- Mock WhatsApp com Moldura iPhone Refinado -->
+      <div class="relative flex justify-center lg:justify-end group">
+        <!-- Glow pulsante atrás do celular -->
+        <div class="absolute inset-0 bg-neon/15 blur-[120px] rounded-full scale-90 animate-pulse pointer-events-none"></div>
+        
+        <div class="relative z-10 w-full max-w-[310px] transform hover:rotate-2 hover:scale-105 transition-all duration-700 ease-out">
+          <!-- Moldura de iPhone Ultra Realista -->
+          <div class="relative mx-auto border-[#1a1a18] bg-[#000] border-[8px] rounded-[3.5rem] h-[640px] w-[300px] shadow-2xl ring-1 ring-white/10 overflow-hidden">
+            
+            <!-- Botão Power -->
+            <div class="absolute -right-[8px] top-[160px] w-[3px] h-[70px] bg-[#1a1a18] rounded-r-md"></div>
+            <!-- Botões Volume -->
+            <div class="absolute -left-[8px] top-[120px] w-[3px] h-[40px] bg-[#1a1a18] rounded-l-md"></div>
+            <div class="absolute -left-[8px] top-[170px] w-[3px] h-[40px] bg-[#1a1a18] rounded-l-md"></div>
+            
+            <!-- Dynamic Island -->
+            <div class="absolute top-2 left-1/2 -translate-x-1/2 w-24 h-6 bg-[#000] rounded-full z-30 flex items-center justify-end px-2 gap-1.5">
+               <div class="w-1.5 h-1.5 rounded-full bg-blue-950/20"></div>
+               <div class="w-1 h-1 rounded-full bg-white/5"></div>
+            </div>
+
+            <!-- Tela do WhatsApp -->
+            <div class="h-full w-full">
+              <WhatsappMock />
+            </div>
+          </div>
+          
+          <!-- Elemento Flutuante: Badge de Atendimento -->
+          <div class="absolute -bottom-4 -left-8 bg-[#0b141a] border-neon/40 border-2 px-4 py-3 rounded-2xl glow-neon hidden sm:flex items-center gap-3 shadow-2xl z-40 transform -rotate-2">
+            <div class="w-2.5 h-2.5 rounded-full bg-neon animate-pulse"></div>
+            <p class="text-[11px] font-black text-ice uppercase tracking-tighter">Resposta em segundos</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

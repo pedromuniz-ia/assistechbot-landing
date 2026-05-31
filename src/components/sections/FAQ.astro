@@ -1,0 +1,53 @@
+---
+import { TRIAL } from '../../config';
+
+const faqs = [
+  {
+    q: "Preciso instalar algum aplicativo?",
+    a: "Não. O AssisTech BOT funciona diretamente dentro do seu WhatsApp. Você recebe o número do bot e começa a usar na hora, sem cadastrar senha ou baixar apps."
+  },
+  {
+    q: "Funciona para qualquer marca?",
+    a: "Sim. Nosso banco de dados cobre as principais marcas do mercado: Samsung, Apple, Xiaomi, Motorola, LG, Realme e outras."
+  },
+  {
+    q: "E se eu digitar o modelo errado?",
+    a: "Nossa IA é treinada para entender variações comuns. Se você digitar 'ifone onze' ou 'moto g 8 plus', o bot saberá exatamente do que você está falando."
+  },
+  {
+    q: "Como é a garantia na OS?",
+    a: "O padrão é 90 dias conforme a lei, mas você pode configurar o prazo de garantia da sua loja diretamente nos comandos do bot."
+  },
+  {
+    q: "Como pago e como cancelo?",
+    a: "O pagamento é via Pix através da Cakto. Não temos fidelidade: se parar de pagar, o acesso é interrompido automaticamente, sem multas ou chatices."
+  },
+  {
+    q: "Tem teste grátis?",
+    a: TRIAL.faq
+  }
+];
+---
+
+<section id="faq" class="py-20 px-4 bg-surface">
+  <div class="container mx-auto max-w-3xl">
+    <div class="text-center mb-16">
+      <span class="text-neon font-bold tracking-[0.25em] text-sm uppercase mb-4 block">DÚVIDAS FREQUENTES</span>
+      <h2 class="text-3xl md:text-5xl font-black text-ice tracking-[-0.04em]">Perguntas <span class="text-neon">comuns.</span></h2>
+    </div>
+
+    <div class="space-y-4">
+      {faqs.map((faq) => (
+        <details class="group p-6 rounded-2xl bg-bg border border-white/5 hover:border-neon/20 transition-all duration-200">
+          <summary class="flex items-center justify-between font-bold text-lg text-ice select-none">
+            <span class="pr-8">{faq.q}</span>
+            <svg class="chevron w-6 h-6 text-neon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"></polyline></svg>
+          </summary>
+          <div class="mt-4 text-muted leading-relaxed">
+            {faq.a}
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

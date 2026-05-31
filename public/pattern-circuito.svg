@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="240" height="240" viewBox="0 0 240 240">
+  <rect width="240" height="240" fill="none"/>
+  <g fill="none" stroke="#7CFF00" stroke-width="2" stroke-linecap="round" opacity="0.55">
+    <!-- traços PCB ortogonais -->
+    <path d="M0 40 H56 L80 64 H120"/>
+    <path d="M120 0 V28 L96 52"/>
+    <path d="M240 72 H180 L160 92 V140"/>
+    <path d="M40 240 V196 L64 172 H110"/>
+    <path d="M200 240 V200 L176 176"/>
+    <path d="M0 150 H38 L60 128"/>
+    <path d="M150 240 H150 L172 218 H240"/>
+    <path d="M210 20 L188 42 H150"/>
+  </g>
+  <g fill="#7CFF00" opacity="0.7">
+    <circle cx="120" cy="64" r="4"/>
+    <circle cx="96" cy="52" r="4"/>
+    <circle cx="160" cy="140" r="4"/>
+    <circle cx="110" cy="172" r="4"/>
+    <circle cx="60" cy="128" r="4"/>
+    <circle cx="150" cy="218" r="4"/>
+    <circle cx="188" cy="42" r="4"/>
+    <circle cx="176" cy="176" r="4"/>
+  </g>
+</svg>

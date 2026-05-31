@@ -1,0 +1,27 @@
+---
+import { TRIAL } from '../../config';
+---
+
+<section class="py-20 px-4 relative overflow-hidden">
+  <!-- Glowing background elements -->
+  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-neon/5 blur-[120px] rounded-full pointer-events-none"></div>
+
+  <div class="container mx-auto max-w-4xl relative z-10">
+    <div class="bg-card border-neon border-2 rounded-[2rem] p-8 md:p-16 text-center glow-neon">
+      <h2 class="text-4xl md:text-6xl font-black text-ice tracking-[-0.04em] mb-6">Pronto para profissionalizar sua <span class="text-neon italic">bancada?</span></h2>
+      <p class="text-xl text-muted mb-10 max-w-2xl mx-auto">
+        Junte-se aos técnicos que já economizam horas de busca e passam mais confiança para seus clientes.
+      </p>
+      
+      <div class="flex flex-col items-center gap-6">
+        <a href={TRIAL.link} class="bg-neon text-bg font-extrabold px-12 py-5 rounded-2xl text-2xl hover:scale-105 outline-none focus-visible:ring-4 focus-visible:ring-neon focus-visible:ring-offset-4 focus-visible:ring-offset-bg transition-transform duration-200 glow-neon">
+          {TRIAL.cta}
+        </a>
+        <p class="text-muted text-sm font-medium flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7CFF00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Pagamento via Pix · Sem fidelidade
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

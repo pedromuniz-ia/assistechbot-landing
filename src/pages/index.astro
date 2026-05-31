@@ -1,0 +1,36 @@
+---
+import Base from '../layouts/Base.astro';
+import WhatsappMock from '../components/WhatsappMock.astro';
+import Hero from '../components/sections/Hero.astro';
+import HowItWorks from '../components/sections/HowItWorks.astro';
+import Benefits from '../components/sections/Benefits.astro';
+import Trust from '../components/sections/Trust.astro';
+import Price from '../components/sections/Price.astro';
+import FAQ from '../components/sections/FAQ.astro';
+import CTAFinal from '../components/sections/CTAFinal.astro';
+import Footer from '../components/sections/Footer.astro';
+---
+
+<Base>
+  <main class="relative min-h-screen overflow-hidden">
+    <!-- Grid de circuito de fundo com Parallax Sutil -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    
+    <!-- Halos de luz de marca (Glows globais) -->
+    <div class="fixed top-0 left-0 w-full h-full pointer-events-none z-[1]">
+      <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full"></div>
+      <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full"></div>
+    </div>
+
+    <div class="relative z-10">
+      <Hero />
+      <HowItWorks />
+      <Benefits />
+      <Trust />
+      <Price />
+      <FAQ />
+      <CTAFinal />
+      <Footer />
+    </div>
+  </main>
+</Base>

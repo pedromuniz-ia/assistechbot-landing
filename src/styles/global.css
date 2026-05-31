@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+@theme {
+  --color-neon: #7CFF00;
+  --color-neon-dark: #3DAA00;
+  --color-bg: #050505;
+  --color-surface: #0A0A0A;
+  --color-surface-hover: #121212;
+  --color-card: #080808;
+  --color-ice: #F5F5F5;
+  --color-muted: #A0A0A0;
+  
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-ice);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HUD / Terminal style utilities */
+.text-hud {
+  font-family: var(--font-mono);
+}
+
+.glow-neon {
+  box-shadow: 0 0 24px rgba(124, 255, 0, 0.22);
+}
+
+.border-neon {
+  border: 1px solid rgba(124, 255, 0, 0.3);
+}
+
+.border-neon:hover,
+.border-neon:focus-visible {
+  border: 1px solid rgba(124, 255, 0, 1);
+  outline: none;
+}
+
+details > summary {
+  list-style: none;
+  cursor: pointer;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+details[open] .chevron {
+  transform: rotate(180deg);
+}
+.chevron {
+  transition: transform 0.2s ease;
+  flex-shrink: 0;
+}

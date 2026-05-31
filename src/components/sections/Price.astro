@@ -1,0 +1,83 @@
+---
+import { CAKTO } from '../../config';
+
+const plans = [
+  {
+    name: "Mensal",
+    price: "9,99",
+    period: "/mês",
+    description: "Ideal para testar e começar.",
+    features: ["Consultas ilimitadas", "Ordens de Serviço", "Histórico completo", "Suporte WhatsApp"],
+    link: CAKTO.mensal,
+    highlight: false
+  },
+  {
+    name: "Anual",
+    price: "99,99",
+    period: "/ano",
+    description: "O melhor custo-benefício.",
+    features: ["Consultas ilimitadas", "Ordens de Serviço", "Histórico completo", "Suporte WhatsApp", "Badge Membro VIP"],
+    link: CAKTO.anual,
+    highlight: true,
+    badge: "ECONOMIA R$ 20"
+  },
+  {
+    name: "Trimestral",
+    price: "29,99",
+    period: "/trimestre",
+    description: "Para quem quer estabilidade.",
+    features: ["Consultas ilimitadas", "Ordens de Serviço", "Histórico completo", "Suporte WhatsApp"],
+    link: CAKTO.trimestral,
+    highlight: false
+  }
+];
+---
+
+<section id="precos" class="py-20 px-4">
+  <div class="container mx-auto max-w-6xl">
+    <div class="text-center mb-16">
+      <span class="text-neon font-bold tracking-[0.25em] text-sm uppercase mb-4 block">PLANOS E PREÇOS</span>
+      <h2 class="text-3xl md:text-5xl font-black text-ice tracking-[-0.04em]">Escolha o plano para sua <span class="text-neon italic">loja.</span></h2>
+      <p class="mt-4 text-muted">Acesso imediato após o Pix. Sem fidelidade.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-end">
+      {plans.map((plan) => (
+        <div class={`relative p-8 rounded-2xl border ${plan.highlight ? 'border-neon glow-neon bg-surface-hover scale-105 z-10' : 'border-white/5 bg-surface'} flex flex-col h-full`}>
+          {plan.badge && (
+            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-neon text-bg font-black text-xs px-4 py-1.5 rounded-full tracking-wider">
+              {plan.badge}
+            </div>
+          )}
+          
+          <div class="mb-8">
+            <h3 class="text-xl font-bold text-ice mb-2">{plan.name}</h3>
+            <div class="flex items-baseline gap-1 tabular-nums">
+              <span class="text-ice text-sm font-bold">R$</span>
+              <span class="text-4xl md:text-5xl font-black text-ice tracking-tight">{plan.price}</span>
+              <span class="text-muted text-sm">{plan.period}</span>
+            </div>
+            <p class="mt-4 text-muted text-sm">{plan.description}</p>
+          </div>
+
+          <ul class="space-y-4 mb-10 flex-1">
+            {plan.features.map((feature) => (
+              <li class="flex items-center gap-3 text-sm text-ice/90">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#7CFF00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                {feature}
+              </li>
+            ))}
+          </ul>
+
+          <a href={plan.link} class={`block text-center py-4 rounded-xl font-extrabold text-lg transition-all duration-200 outline-none focus-visible:ring-2 focus-visible:ring-neon focus-visible:ring-offset-2 focus-visible:ring-offset-bg ${plan.highlight ? 'bg-neon text-bg hover:scale-105' : 'bg-white/5 text-ice hover:bg-white/10'}`}>
+            Assinar agora
+          </a>
+        </div>
+      ))}
+    </div>
+    
+    <div class="mt-12 text-center">
+      <p class="text-muted text-sm">Pagamento seguro processado via Cakto. <br class="sm:hidden" /> Dúvidas? <a href="#" class="text-neon underline underline-offset-4">Fale conosco.</a></p>
+    </div>
+  </div>
+</section>
