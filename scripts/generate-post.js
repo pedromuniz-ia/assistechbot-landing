@@ -62,7 +62,8 @@ tags: ["Tag1", "Tag2"]
 2. O conteúdo deve ser estruturado com títulos (##), listas e parágrafos curtos.
 3. Use jargões reais de assistência técnica (ex: bancada, fluxo de solda, fonte de bancada, curto na placa, tela original, frontal paralela, consumo, etc.).
 4. No final do texto, inclua esta chamada para o WhatsApp:
-"Se você quer profissionalizar sua assistência técnica de celulares, gerenciar garantias e ordens de serviço em PDF em 1 minuto direto no WhatsApp do cliente, conheça o AssisTech BOT. 👉 [Clique aqui para testar o AssisTech BOT gratuitamente no WhatsApp](https://wa.me/556282458981?text=Olá! Quero testar o bot de O.S.)"
+"Se você quer profissionalizar sua assistência técnica de celulares, gerenciar garantias e ordens de serviço em PDF em 1 minuto direto no WhatsApp do cliente, conheça o AssisTech BOT. 👉 [Clique aqui para testar o AssisTech BOT gratuitamente no WhatsApp](https://assistechbot.online/chat?utm_source=blog&utm_campaign=auto-post)"
+
 
 Retorne apenas o markdown completo do post, sem envolver o resultado em caixas de código markdown (como \`\`\`markdown).`
           }

@@ -19,7 +19,8 @@ const { item } = Astro.props;
 // Meta tags SEO
 const pageTitle = `Película Compatível com ${item.modelo} — Tabela de Bancada`;
 const pageDescription = `Descubra qual película serve no ${item.modelo}. Modelos compatíveis: ${item.compativeis.join(', ')}. Consulte compatibilidades e gere O.S. no WhatsApp.`;
-const whatsappLink = `${TRIAL.link}&text=Olá! Vim da página de compatibilidade do ${item.modelo} e quero testar o bot`;
+const whatsappLink = `/chat?utm_source=seo&utm_campaign=modelo-${item.slug}`;
+
 
 // Schema Markup JSON-LD (FAQPage)
 const schemaMarkup = {

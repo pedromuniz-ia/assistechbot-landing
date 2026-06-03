@@ -22,7 +22,8 @@ const { Content } = await render(post);
 // SEO Meta Tags
 const pageTitle = `${post.data.title} — Blog AssisTech BOT`;
 const pageDescription = post.data.description;
-const whatsappLink = `${TRIAL.link}&text=Olá! Li o artigo sobre ${post.data.title} e quero testar o bot`;
+const whatsappLink = `/chat?utm_source=blog&utm_campaign=post-${post.id}`;
+
 
 // Schema Markup (Article) JSON-LD
 const schemaMarkup = {
