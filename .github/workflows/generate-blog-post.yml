@@ -1,0 +1,34 @@
+name: Auto Generate Daily Blog Post
+
+on:
+  schedule:
+    # Roda todos os dias às 09:00 UTC (06:00 Horário de Brasília)
+    - cron: '0 9 * * *'
+  workflow_dispatch:
+    # Permite disparar manualmente pelo painel do GitHub
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Generate Post
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node scripts/generate-post.js
+
+      - name: Commit and Push new post
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/content/blog/
+          # Se não houver arquivos adicionados, evita falhar o step
+          git diff-index --quiet HEAD || git commit -m "chore: auto generate daily blog post [skip ci]"
+          git push origin HEAD:${{ github.ref }}
