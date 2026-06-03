@@ -12,7 +12,9 @@ export const TRIAL = {
 }
 
 export const TRACKING = {
+  GTM_ID: 'GTM-XXXXXXX', // Substituir pelo ID real do Google Tag Manager
   GA4_ID: 'G-XXXXXXXXXX', // Substituir pelo ID real do GA4
   PIXEL_ID: 'XXXXXXXXXXXXXXX', // Substituir pelo ID real do Meta Pixel
 }
+
 
