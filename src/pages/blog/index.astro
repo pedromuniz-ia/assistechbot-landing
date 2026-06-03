@@ -1,0 +1,81 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+const pageTitle = 'Blog AssisTech BOT — Dicas de Gestão e Bancada';
+const pageDescription = 'Conteúdo prático sobre gestão de assistência técnica de celular, controle de garantias, películas compatíveis e otimização de bancada.';
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <main class="relative min-h-screen overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+    <!-- Efeitos Visuais -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <!-- Cabeçalho -->
+      <div class="text-center mb-16">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-neon/10 text-neon border border-neon/20 uppercase tracking-wider">
+          Munição para Lojistas
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-ice tracking-tight mt-4 mb-4">
+          Dicas de Bancada & Gestão
+        </h1>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Artigos direto ao ponto para profissionalizar sua assistência técnica de celulares e faturar mais.
+        </p>
+      </div>
+
+      <!-- Lista de Posts -->
+      <div class="space-y-6">
+        {posts.map((post) => (
+          <article class="bg-card border border-white/5 rounded-2xl p-6 sm:p-8 hover:border-neon/30 transition-all duration-200 backdrop-blur-md">
+            <div class="flex items-center gap-4 text-xs text-muted mb-3">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('pt-BR', {
+                  day: '2-digit',
+                  month: 'long',
+                  year: 'numeric',
+                })}
+              </time>
+              <span>•</span>
+              <span class="text-neon">{post.data.author}</span>
+            </div>
+
+            <h2 class="text-xl font-bold text-ice mb-3 hover:text-neon transition-colors duration-200">
+              <a href={`/blog/${post.id}`} id={`post-link-${post.id}`}>
+                {post.data.title}
+              </a>
+            </h2>
+
+            <p class="text-sm text-muted mb-6 line-clamp-2">
+              {post.data.description}
+            </p>
+
+            <div class="flex flex-wrap gap-2 mb-6">
+              {post.data.tags.map((tag) => (
+                <span class="px-2 py-1 rounded text-xs bg-white/5 text-ice border border-white/10">
+                  #{tag}
+                </span>
+              ))}
+            </div>
+
+            <a
+              href={`/blog/${post.id}`}
+              id={`read-more-${post.id}`}
+              class="inline-flex items-center text-sm font-bold text-neon hover:text-neon-dark group"
+            >
+              Ler artigo completo 
+              <span class="ml-1 transform group-hover:translate-x-1 transition-transform duration-200">➔</span>
+            </a>
+          </article>
+        ))}
+      </div>
+    </div>
+  </main>
+</Base>

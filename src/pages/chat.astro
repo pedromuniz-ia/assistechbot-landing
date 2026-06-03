@@ -1,0 +1,88 @@
+---
+import Base from '../layouts/Base.astro';
+import { TRIAL } from '../config';
+
+// Rota de Redirecionamento Inteligente para o WhatsApp
+---
+
+<Base title="Conectando..." description="Redirecionando para o WhatsApp do AssisTech BOT.">
+  <main class="min-h-screen flex items-center justify-center bg-bg text-ice">
+    <!-- Efeitos Visuais -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+
+    <div class="relative z-10 text-center">
+      <div class="w-12 h-12 border-4 border-neon border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+      <p class="text-neon text-hud tracking-wider animate-pulse mb-2">Conectando ao WhatsApp...</p>
+      <p class="text-xs text-muted">
+        Se não for redirecionado automaticamente, 
+        <a href="#" id="direct-link" class="text-neon underline font-bold">clique aqui</a>.
+      </p>
+    </div>
+  </main>
+
+  <script is:inline define:vars={{ defaultLink: TRIAL.link }}>
+    (function() {
+      // Captura parâmetros da URL atual
+      const currentUrlParams = new URLSearchParams(window.location.search);
+      const savedUtms = JSON.parse(sessionStorage.getItem('assistech_utms') || '{}');
+      
+      // Adiciona parâmetros atuais da query de entrada
+      const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'src'];
+      utmKeys.forEach(param => {
+        if (currentUrlParams.has(param)) {
+          savedUtms[param] = currentUrlParams.get(param);
+        }
+      });
+
+      try {
+        const targetUrl = new URL(defaultLink);
+        const textParam = targetUrl.searchParams.get('text') || '';
+        
+        // Adiciona as UTMs como query params no link final do WhatsApp
+        Object.keys(savedUtms).forEach(key => {
+          targetUrl.searchParams.set(key, savedUtms[key]);
+        });
+        
+        // Anexa tag de referência amigável ao final do texto
+        let newText = textParam;
+        if (savedUtms.utm_source) {
+          newText += ` [Ref: ${savedUtms.utm_source}`;
+          if (savedUtms.utm_campaign) {
+            newText += ` / ${savedUtms.utm_campaign}`;
+          }
+          newText += ']';
+        }
+        targetUrl.searchParams.set('text', newText);
+
+        const finalHref = targetUrl.toString();
+
+        // Atualiza o link manual de segurança
+        const link = document.getElementById('direct-link');
+        if (link) {
+          link.href = finalHref;
+        }
+
+        // Dispara conversões de tracking antes do redirecionamento
+        if (typeof gtag !== 'undefined') {
+          gtag('event', 'generate_lead', {
+            'event_category': 'Engagement',
+            'event_label': 'WhatsApp Redirector Page'
+          });
+        }
+        if (typeof fbq !== 'undefined') {
+          fbq('track', 'Lead');
+        }
+
+        // Redireciona imediatamente
+        setTimeout(() => {
+          window.location.href = finalHref;
+        }, 300);
+
+      } catch (e) {
+        window.location.href = defaultLink;
+      }
+    })();
+  </script>
+</Base>

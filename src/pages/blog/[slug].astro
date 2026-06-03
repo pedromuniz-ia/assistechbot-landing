@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+import { TRIAL } from '../../config';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+interface Props {
+  post: Awaited<ReturnType<typeof getCollection<'blog'>>>[number];
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+
+// SEO Meta Tags
+const pageTitle = `${post.data.title} — Blog AssisTech BOT`;
+const pageDescription = post.data.description;
+const whatsappLink = `/chat?utm_source=blog&utm_campaign=post-${post.id}`;
+
+
+// Schema Markup (Article) JSON-LD
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": post.data.title,
+  "description": post.data.description,
+  "datePublished": post.data.pubDate.toISOString(),
+  "author": {
+    "@type": "Person",
+    "name": post.data.author,
+  },
+};
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <!-- Schema Markup Injection -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+
+  <main class="relative min-h-screen overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+    <!-- Efeitos Visuais -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+
+    <div class="relative z-10 max-w-3xl mx-auto">
+      <!-- Voltar -->
+      <div class="mb-8 text-hud text-xs text-neon tracking-wider uppercase">
+        <a href="/blog" class="hover:underline" id="back-to-blog-link">
+          ⇠ Voltar para o Blog
+        </a>
+      </div>
+
+      <article class="bg-card border border-white/5 rounded-2xl p-6 sm:p-10 backdrop-blur-md">
+        <!-- Metadados -->
+        <div class="flex items-center gap-4 text-xs text-muted mb-4">
+          <time datetime={post.data.pubDate.toISOString()}>
+            {post.data.pubDate.toLocaleDateString('pt-BR', {
+              day: '2-digit',
+              month: 'long',
+              year: 'numeric',
+            })}
+          </time>
+          <span>•</span>
+          <span class="text-neon">Por {post.data.author}</span>
+        </div>
+
+        <!-- Título principal -->
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-ice tracking-tight mb-8 leading-tight">
+          {post.data.title}
+        </h1>
+
+        <!-- Conteúdo do post (Markdown renderizado) -->
+        <div class="prose prose-invert prose-neon max-w-none text-muted leading-relaxed space-y-6 
+                    prose-headings:text-ice prose-headings:font-bold prose-headings:mt-8 prose-headings:mb-4
+                    prose-h2:text-xl prose-h3:text-lg
+                    prose-a:text-neon prose-a:underline hover:prose-a:text-neon-dark
+                    prose-strong:text-ice prose-strong:font-bold
+                    prose-ul:list-disc prose-ul:pl-6 prose-ul:space-y-2
+                    prose-hr:border-white/10 prose-hr:my-8">
+          <Content />
+        </div>
+
+        <!-- Banner de Conversão ao final -->
+        <div class="border-t border-white/10 mt-12 pt-10 text-center sm:text-left">
+          <div class="bg-surface/50 border border-neon/20 rounded-xl p-6 sm:p-8 glow-neon">
+            <h2 class="text-lg font-bold text-ice mb-3 mt-0">
+              Pare de perder tempo com processos manuais na bancada
+            </h2>
+            <p class="text-sm text-muted mb-6">
+              O AssisTech BOT resolve a compatibilidade de películas e gera ordens de serviço profissionais em PDF direto no seu WhatsApp, sem planilhas ou sistemas complicados.
+            </p>
+            <a
+              href={whatsappLink}
+              id="blog-post-whatsapp-cta-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 rounded-xl text-base font-bold bg-neon text-bg hover:bg-neon-dark shadow-lg shadow-neon/20 transition-all duration-300 transform hover:-translate-y-0.5"
+            >
+              Testar Grátis no WhatsApp
+            </a>
+            <span class="block text-xs text-muted mt-3">
+              * Sem compromisso. Comece a usar em 10 segundos.
+            </span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</Base>
