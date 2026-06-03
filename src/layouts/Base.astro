@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css'
+import { TRACKING } from '../config'
 
 interface Props {
   title?: string
@@ -10,6 +11,8 @@ const {
   title = 'AssisTech BOT — Seu assistente técnico no WhatsApp',
   description = 'Consulta de película na hora, ordem de serviço com sua marca e garantia rastreável. Tudo no WhatsApp, sem app, sem painel.'
 } = Astro.props
+
+const { GA4_ID, PIXEL_ID } = TRACKING;
 ---
 <!doctype html>
 <html lang="pt-BR" dir="ltr">
@@ -22,8 +25,115 @@ const {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,800&display=swap" rel="stylesheet" />
     <title>{title}</title>
+
+    <!-- Google Analytics (GA4) -->
+    {GA4_ID && GA4_ID !== 'G-XXXXXXXXXX' && (
+      <>
+        <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}></script>
+        <script is:inline define:vars={{ GA4_ID }}>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', GA4_ID);
+        </script>
+      </>
+    )}
+
+    <!-- Meta Pixel (Facebook Pixel) -->
+    {PIXEL_ID && PIXEL_ID !== 'XXXXXXXXXXXXXXX' && (
+      <script is:inline define:vars={{ PIXEL_ID }}>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', PIXEL_ID);
+        fbq('track', 'PageView');
+      </script>
+      <noscript>
+        <img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${PIXEL_ID}&ev=PageView&noscript=1`} />
+      </noscript>
+    )}
+
+    <!-- UTM Parameter Capture & WhatsApp Link Propagation -->
+    <script is:inline>
+      (function() {
+        // Captura UTMs da URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const utms = {};
+        const utmKeys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid', 'src'];
+        
+        utmKeys.forEach(param => {
+          if (urlParams.has(param)) {
+            utms[param] = urlParams.get(param);
+          }
+        });
+
+        // Persiste no sessionStorage para manter o rastreamento em cliques internos
+        if (Object.keys(utms).length > 0) {
+          sessionStorage.setItem('assistech_utms', JSON.stringify(utms));
+        }
+
+        // Recupera UTMs persistidas
+        const savedUtms = JSON.parse(sessionStorage.getItem('assistech_utms') || '{}');
+
+        // Função para atualizar links de WhatsApp
+        function propagateUtms() {
+          const links = document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]');
+          links.forEach(link => {
+            try {
+              const url = new URL(link.href);
+              const textParam = url.searchParams.get('text') || '';
+              
+              // Adiciona os parâmetros no link
+              Object.keys(savedUtms).forEach(key => {
+                url.searchParams.set(key, savedUtms[key]);
+              });
+              
+              // Adiciona menção legível no texto do WhatsApp para o painel
+              let newText = textParam;
+              if (savedUtms.utm_source) {
+                newText += ` [Ref: ${savedUtms.utm_source}`;
+                if (savedUtms.utm_campaign) {
+                  newText += ` / ${savedUtms.utm_campaign}`;
+                }
+                newText += ']';
+              }
+              url.searchParams.set('text', newText);
+              link.href = url.toString();
+            } catch (e) {
+              // Silencia erros de parse de link
+            }
+          });
+        }
+
+        // Roda no DOMReady
+        window.addEventListener('DOMContentLoaded', () => {
+          propagateUtms();
+
+          // Monitora cliques para disparar eventos de conversão (Lead)
+          document.querySelectorAll('a[href*="wa.me"], a[href*="api.whatsapp.com"]').forEach(btn => {
+            btn.addEventListener('click', () => {
+              if (typeof gtag !== 'undefined') {
+                gtag('event', 'generate_lead', {
+                  'event_category': 'Engagement',
+                  'event_label': 'WhatsApp Bot Click'
+                });
+              }
+              if (typeof fbq !== 'undefined') {
+                fbq('track', 'Lead');
+              }
+            });
+          });
+        });
+      })();
+    </script>
   </head>
   <body>
     <slot />
   </body>
 </html>
+

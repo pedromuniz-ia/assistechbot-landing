@@ -1,0 +1,162 @@
+[
+  {
+    "modelo": "iPhone XR",
+    "slug": "iphone-xr",
+    "marca": "Apple",
+    "compativeis": ["iPhone 11"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "iPhone 11",
+    "slug": "iphone-11",
+    "marca": "Apple",
+    "compativeis": ["iPhone XR"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "iPhone X",
+    "slug": "iphone-x",
+    "marca": "Apple",
+    "compativeis": ["iPhone XS", "iPhone 11 Pro"],
+    "tamanho_tela": "5.8\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "iPhone XS",
+    "slug": "iphone-xs",
+    "marca": "Apple",
+    "compativeis": ["iPhone X", "iPhone 11 Pro"],
+    "tamanho_tela": "5.8\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "iPhone 11 Pro",
+    "slug": "iphone-11-pro",
+    "marca": "Apple",
+    "compativeis": ["iPhone X", "iPhone XS"],
+    "tamanho_tela": "5.8\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "iPhone 12",
+    "slug": "iphone-12",
+    "marca": "Apple",
+    "compativeis": ["iPhone 12 Pro"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / 3D Premium"
+  },
+  {
+    "modelo": "iPhone 12 Pro",
+    "slug": "iphone-12-pro",
+    "marca": "Apple",
+    "compativeis": ["iPhone 12"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / 3D Premium"
+  },
+  {
+    "modelo": "iPhone 13",
+    "slug": "iphone-13",
+    "marca": "Apple",
+    "compativeis": ["iPhone 13 Pro", "iPhone 14"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "iPhone 13 Pro",
+    "slug": "iphone-13-pro",
+    "marca": "Apple",
+    "compativeis": ["iPhone 13", "iPhone 14"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "iPhone 14",
+    "slug": "iphone-14",
+    "marca": "Apple",
+    "compativeis": ["iPhone 13", "iPhone 13 Pro"],
+    "tamanho_tela": "6.1\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "Moto G14",
+    "slug": "moto-g14",
+    "marca": "Motorola",
+    "compativeis": ["Moto G23", "Moto G54", "Moto G84"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Gel"
+  },
+  {
+    "modelo": "Moto G23",
+    "slug": "moto-g23",
+    "marca": "Motorola",
+    "compativeis": ["Moto G14", "Moto G54", "Moto G84"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Gel"
+  },
+  {
+    "modelo": "Moto G54",
+    "slug": "moto-g54",
+    "marca": "Motorola",
+    "compativeis": ["Moto G14", "Moto G23", "Moto G84"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Gel"
+  },
+  {
+    "modelo": "Moto G84",
+    "slug": "moto-g84",
+    "marca": "Motorola",
+    "compativeis": ["Moto G14", "Moto G23", "Moto G54"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Gel"
+  },
+  {
+    "modelo": "Samsung Galaxy A14",
+    "slug": "samsung-a14",
+    "marca": "Samsung",
+    "compativeis": ["Samsung Galaxy A15", "Samsung Galaxy A24", "Samsung Galaxy A25"],
+    "tamanho_tela": "6.6\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "Samsung Galaxy A15",
+    "slug": "samsung-a15",
+    "marca": "Samsung",
+    "compativeis": ["Samsung Galaxy A14", "Samsung Galaxy A24", "Samsung Galaxy A25"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "Samsung Galaxy A24",
+    "slug": "samsung-a24",
+    "marca": "Samsung",
+    "compativeis": ["Samsung Galaxy A14", "Samsung Galaxy A15", "Samsung Galaxy A25"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "Samsung Galaxy A25",
+    "slug": "samsung-a25",
+    "marca": "Samsung",
+    "compativeis": ["Samsung Galaxy A14", "Samsung Galaxy A15", "Samsung Galaxy A24"],
+    "tamanho_tela": "6.5\"",
+    "tipo_pelicula": "Vidro / 3D / Privacidade"
+  },
+  {
+    "modelo": "Redmi Note 12",
+    "slug": "redmi-note-12",
+    "marca": "Xiaomi",
+    "compativeis": ["Poco X5"],
+    "tamanho_tela": "6.67\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  },
+  {
+    "modelo": "Poco X5",
+    "slug": "poco-x5",
+    "marca": "Xiaomi",
+    "compativeis": ["Redmi Note 12"],
+    "tamanho_tela": "6.67\"",
+    "tipo_pelicula": "Vidro / 3D / Cerâmica"
+  }
+]
