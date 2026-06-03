@@ -10,3 +10,9 @@ export const TRIAL = {
   descricao: '3 consultas de película gratuitas pra começar',
   faq: 'Sim. As 3 primeiras consultas de película são por nossa conta, sem precisar de cartão.',
 }
+
+export const TRACKING = {
+  GA4_ID: 'G-XXXXXXXXXX', // Substituir pelo ID real do GA4
+  PIXEL_ID: 'XXXXXXXXXXXXXXX', // Substituir pelo ID real do Meta Pixel
+}
+

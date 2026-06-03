@@ -1,0 +1,92 @@
+---
+import Base from '../../layouts/Base.astro';
+import compatibilidades from '../../data/compatibilidades.json';
+import { TRIAL } from '../../config';
+
+const pageTitle = 'Tabela de Compatibilidade de Películas de Celular';
+const pageDescription = 'Consulte a equivalência de películas de celular das marcas Apple, Samsung, Motorola e Xiaomi. Facilite o controle de estoque da sua assistência técnica.';
+
+// Agrupar modelos por marca
+const marcas = compatibilidades.reduce((acc, item) => {
+  if (!acc[item.marca]) {
+    acc[item.marca] = [];
+  }
+  acc[item.marca].push(item);
+  return acc;
+}, {} as Record<string, typeof compatibilidades>);
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <main class="relative min-h-screen overflow-hidden py-16 px-4 sm:px-6 lg:px-8">
+    <!-- Efeitos Visuais -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto">
+      <!-- Cabeçalho -->
+      <div class="text-center mb-16">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-neon/10 text-neon border border-neon/20 uppercase tracking-wider">
+          Banco de Dados de Bancada
+        </span>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-ice tracking-tight mt-4 mb-4">
+          Tabela de Compatibilidade de Películas
+        </h1>
+        <p class="text-lg text-muted max-w-2xl mx-auto">
+          Encontre rapidamente quais modelos de celulares compartilham as mesmas películas de vidro, 3D ou cerâmica e otimize seu estoque.
+        </p>
+      </div>
+
+      <!-- Marcas e Modelos -->
+      <div class="space-y-12">
+        {Object.entries(marcas).map(([marca, modelos]) => (
+          <div class="bg-card border border-white/5 rounded-2xl p-6 sm:p-8 backdrop-blur-md">
+            <h2 class="text-xl font-bold text-neon mb-6 border-b border-white/10 pb-2">
+              {marca}
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+              {modelos.map((item) => (
+                <a
+                  href={`/compatibilidade/${item.slug}`}
+                  class="flex items-center justify-between p-4 rounded-xl bg-surface border border-white/5 hover:border-neon/30 hover:bg-surface-hover transition-all duration-200 group"
+                  id={`model-link-${item.slug}`}
+                >
+                  <div>
+                    <span class="font-bold text-ice block group-hover:text-neon transition-colors duration-200">
+                      {item.modelo}
+                    </span>
+                    <span class="text-xs text-muted">
+                      Tela {item.tamanho_tela}
+                    </span>
+                  </div>
+                  <span class="text-neon opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-hud text-sm">
+                    ➔
+                  </span>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <!-- Card CTA Fixado embaixo -->
+      <div class="bg-card border border-neon/20 rounded-2xl p-6 sm:p-8 mt-16 text-center glow-neon border-neon/20 max-w-2xl mx-auto">
+        <h3 class="text-lg font-bold text-ice mb-3">
+          Quer consultar compatibilidade sem pesquisar no Google?
+        </h3>
+        <p class="text-sm text-muted mb-6">
+          Nosso bot no WhatsApp responde instantaneamente na bancada, aceitando erros de digitação e enviando a ficha técnica completa.
+        </p>
+        <a
+          href={`${TRIAL.link}&text=Olá! Quero testar o bot de compatibilidade`}
+          id="hub-whatsapp-cta-link"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 rounded-xl text-base font-bold bg-neon text-bg hover:bg-neon-dark shadow-lg shadow-neon/20 transition-all duration-300 transform hover:-translate-y-0.5"
+        >
+          Falar com Bot no WhatsApp (Grátis)
+        </a>
+      </div>
+    </div>
+  </main>
+</Base>

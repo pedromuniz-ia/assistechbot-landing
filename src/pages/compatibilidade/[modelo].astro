@@ -1,0 +1,135 @@
+---
+import Base from '../../layouts/Base.astro';
+import compatibilidades from '../../data/compatibilidades.json';
+import { TRIAL } from '../../config';
+
+export async function getStaticPaths() {
+  return compatibilidades.map((item) => ({
+    params: { modelo: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: typeof compatibilidades[number];
+}
+
+const { item } = Astro.props;
+
+// Meta tags SEO
+const pageTitle = `Película Compatível com ${item.modelo} — Tabela de Bancada`;
+const pageDescription = `Descubra qual película serve no ${item.modelo}. Modelos compatíveis: ${item.compativeis.join(', ')}. Consulte compatibilidades e gere O.S. no WhatsApp.`;
+const whatsappLink = `${TRIAL.link}&text=Olá! Vim da página de compatibilidade do ${item.modelo} e quero testar o bot`;
+
+// Schema Markup JSON-LD (FAQPage)
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": `Qual película é compatível com o ${item.modelo}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `A película do ${item.modelo} é 100% compatível com os seguintes modelos: ${item.compativeis.join(', ')}.`
+      }
+    },
+    {
+      "@type": "Question",
+      "name": `Qual o tamanho da tela do ${item.modelo}?`,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": `O ${item.modelo} possui uma tela de ${item.tamanho_tela}.`
+      }
+    }
+  ]
+};
+---
+
+<Base title={pageTitle} description={pageDescription}>
+  <!-- Schema Markup Injection -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+
+  <main class="relative min-h-screen overflow-hidden flex flex-col justify-between py-12 px-4 sm:px-6 lg:px-8">
+    <!-- Glow de fundo -->
+    <div class="fixed inset-0 pointer-events-none opacity-[0.05] z-0 bg-[url('/pattern-circuito.svg')] bg-repeat bg-center mix-blend-screen"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-neon/5 blur-[150px] rounded-full pointer-events-none z-[1]"></div>
+
+    <div class="relative z-10 max-w-2xl mx-auto w-full flex-grow flex flex-col justify-center">
+      <!-- Breadcrumb / HUD element -->
+      <div class="mb-6 text-hud text-xs text-neon tracking-wider uppercase flex items-center gap-2">
+        <a href="/compatibilidade" class="hover:underline" id="breadcrumb-hub-link">Tabelas</a>
+        <span>/</span>
+        <span class="text-muted">{item.marca}</span>
+        <span>/</span>
+        <span class="text-ice">{item.modelo}</span>
+      </div>
+
+      <!-- Main Card -->
+      <div class="bg-card border border-white/5 rounded-2xl p-6 sm:p-8 glow-neon border-neon/20 backdrop-blur-md">
+        <span class="px-3 py-1 rounded-full text-xs font-semibold bg-neon/10 text-neon border border-neon/20 mb-4 inline-block">
+          Ficha Técnica de Bancada
+        </span>
+
+        <h1 class="text-2xl sm:text-3xl font-extrabold text-ice tracking-tight mt-2 mb-6">
+          Película Compatível com <span class="text-neon">{item.modelo}</span>
+        </h1>
+
+        <!-- Info Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div class="bg-surface border border-white/5 rounded-xl p-4">
+            <span class="text-xs text-muted block mb-1">Tamanho da Tela</span>
+            <span class="text-lg font-bold text-ice">{item.tamanho_tela}</span>
+          </div>
+          <div class="bg-surface border border-white/5 rounded-xl p-4">
+            <span class="text-xs text-muted block mb-1">Materiais Recomendados</span>
+            <span class="text-lg font-bold text-ice">{item.tipo_pelicula}</span>
+          </div>
+        </div>
+
+        <!-- Compatibility section -->
+        <div class="bg-surface/50 border border-neon/10 rounded-xl p-5 mb-8">
+          <h2 class="text-sm font-semibold text-muted tracking-wider uppercase mb-3">
+            Celulares Compatíveis (Mesma Película):
+          </h2>
+          <div class="flex flex-wrap gap-2">
+            {item.compativeis.map((modelo) => (
+              <span class="px-3 py-1.5 rounded-lg text-sm font-bold bg-white/5 text-ice border border-white/10">
+                {modelo}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="text-center sm:text-left">
+          <h3 class="text-base font-semibold text-ice mb-3">
+            Precisa consultar outros modelos na correria da bancada?
+          </h3>
+          <p class="text-sm text-muted mb-6">
+            Nosso robô de WhatsApp responde na hora. Digite o nome do celular (mesmo com erros de digitação) e receba a compatibilidade de película instantaneamente.
+          </p>
+
+          <a
+            href={whatsappLink}
+            id="whatsapp-cta-link"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center w-full sm:w-auto px-6 py-4 rounded-xl text-base font-bold bg-neon text-bg hover:bg-neon-dark shadow-lg shadow-neon/20 transition-all duration-300 transform hover:-translate-y-0.5"
+          >
+            Consultar Outro Modelo no WhatsApp (Grátis)
+          </a>
+          <span class="block text-xs text-muted mt-3 text-center sm:text-left">
+            * 3 consultas grátis inclusas de boas-vindas
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mini Footer -->
+    <div class="relative z-10 text-center text-xs text-muted mt-12">
+      <p>© {new Date().getFullYear()} AssisTech BOT — Dados técnicos atualizados.</p>
+    </div>
+  </main>
+</Base>
