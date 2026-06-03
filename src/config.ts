@@ -16,7 +16,8 @@ export const TRACKING = {
 
   GA4_ID: 'G-2DYV6NW688', // ID do GA4 do Pedro
 
-  PIXEL_ID: 'XXXXXXXXXXXXXXX', // Substituir pelo ID real do Meta Pixel
+  PIXEL_ID: '1568103168282730', // ID do Meta Pixel do Pedro
 }
+
 
 
