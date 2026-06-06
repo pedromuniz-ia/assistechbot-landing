@@ -33,5 +33,5 @@ jobs:
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add src/content/blog/
           # Se não houver arquivos adicionados, evita falhar o step
-          git diff-index --quiet HEAD || git commit -m "chore: auto generate daily blog post [skip ci]"
+          git diff-index --quiet HEAD || git commit -m "chore: auto generate daily blog post"
           git push origin HEAD:${{ github.ref }}
