@@ -107,11 +107,15 @@ const { GTM_ID, GA4_ID, PIXEL_ID } = TRACKING;
               // Adiciona menção legível no texto do WhatsApp para o painel
               let newText = textParam;
               if (savedUtms.utm_source) {
-                newText += ` [Ref: ${savedUtms.utm_source}`;
-                if (savedUtms.utm_campaign) {
-                  newText += ` / ${savedUtms.utm_campaign}`;
+                if (savedUtms.utm_source === 'pdf') {
+                  newText = 'Olá! Vi a tabela de películas e quero usar o bot';
+                } else {
+                  newText += ` [Ref: ${savedUtms.utm_source}`;
+                  if (savedUtms.utm_campaign) {
+                    newText += ` / ${savedUtms.utm_campaign}`;
+                  }
+                  newText += ']';
                 }
-                newText += ']';
               }
               url.searchParams.set('text', newText);
               link.href = url.toString();
